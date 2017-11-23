@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标特效</title>
+    <link rel="stylesheet" href="./src/css/reset.min.css">
+    <link rel="stylesheet" href="./src/css/mouse-effect.css">
+</head>
+
+<body>
+    <div class="box">
+        <div class="container">
+            <div class="inner"></div>
+        </div>
+        <div class="container">
+            <div class="inner"></div>
+        </div>
+        <div class="container">
+            <div class="inner"></div>
+        </div>
+        <div class="container">
+            <div class="inner"></div>
+        </div>
+        <div class="container">
+            <div class="inner"></div>
+        </div>
+        <div class="container">
+            <div class="inner"></div>
+        </div>
+        <div class="container">你好</div>
+        <div class="container">你好</div>
+        <div class="container">你好</div>
+        <div class="container">你好</div>
+
+    </div>
+    <script src="./src/js/unit.js"></script>
+    <script>
+        window.onload = function() {
+            window.initsize();
+            window.onresize = function() {
+                window.initsize();
+                // 添加时间节流
+                // window.throttle(500, function() {
+                //     init();
+                // });
+            }
+        }
+    </script>
+</body>
+
+</html>

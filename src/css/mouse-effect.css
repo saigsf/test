@@ -1,0 +1,384 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: auto;
+}
+html {
+  font-size: 12px;
+}
+.box {
+  width: 100%;
+  height: 100%;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#333));
+  background: -webkit-linear-gradient(top, #fff, #333);
+  background: -o-linear-gradient(top, #fff, #333);
+  background: linear-gradient(to bottom, #fff, #333);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-line-pack: distribute;
+      align-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.container {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #fff;
+  position: relative;
+}
+.container .inner {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: -webkit-gradient(linear, left top, left bottom, from(red), color-stop(orange), color-stop(greenyellow), to(green));
+  background: -webkit-linear-gradient(top, red, orange, greenyellow, green);
+  background: -o-linear-gradient(top, red, orange, greenyellow, green);
+  background: linear-gradient(to bottom, red, orange, greenyellow, green);
+  -webkit-transition: all .5s ease 0s;
+  -o-transition: all .5s ease 0s;
+  transition: all .5s ease 0s;
+}
+.container:hover .inner {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: -webkit-gradient(linear, left top, left bottom, from(red), color-stop(orange), color-stop(greenyellow), to(green));
+  background: -webkit-linear-gradient(top, red, orange, greenyellow, green);
+  background: -o-linear-gradient(top, red, orange, greenyellow, green);
+  background: linear-gradient(to bottom, red, orange, greenyellow, green);
+  -webkit-box-shadow: 0 0 10px #ff3300;
+          box-shadow: 0 0 10px #ff3300;
+  -webkit-animation: beat .5s ease 0s;
+          animation: beat .5s ease 0s;
+}
+.container:before {
+  content: "";
+  background-color: rgba(38, 228, 70, 0.7);
+  -webkit-transition: all .5s ease 0s;
+  -o-transition: all .5s ease 0s;
+  transition: all .5s ease 0s;
+  position: absolute;
+}
+.container:after {
+  content: "";
+  background-color: rgba(38, 228, 70, 0.7);
+  -webkit-transition: all .5s ease 0s;
+  -o-transition: all .5s ease 0s;
+  transition: all .5s ease 0s;
+  position: absolute;
+}
+.container:nth-child(1) {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  /*景深相当于眼睛距离元素的位置距离*/
+  -webkit-perspective: 500px;
+          perspective: 500px;
+  /* overflow: hidden; */
+}
+.container:nth-child(1):before {
+  height: 100%;
+  width: 50%;
+  left: 0;
+  top: 0;
+  -webkit-transform-origin: 0 0;
+      -ms-transform-origin: 0 0;
+          transform-origin: 0 0;
+}
+.container:nth-child(1):after {
+  height: 100%;
+  width: 50%;
+  right: 0;
+  top: 0;
+  -webkit-transform-origin: 100% 0;
+      -ms-transform-origin: 100% 0;
+          transform-origin: 100% 0;
+}
+.container:nth-child(1):hover:before {
+  /* 左右滑动打开 ,要加overflow: hidden; */
+  /* left: -50%; */
+  /* 给变宽度 */
+  /* width: 0%; */
+  /* 使用旋转打开 ，开窗式 ，分为里开和外开 ，要改变旋转轴 transform-origin: 0 0;*/
+  -webkit-transform: rotateY(-90deg);
+          transform: rotateY(-90deg);
+}
+.container:nth-child(1):hover:after {
+  /* 左右滑动打开 */
+  /* 给变宽度 */
+  /* width: 0%; */
+  /* 使用旋转打开 ，开窗式 ，分为里开和外开，要改变旋转轴 transform-origin: 0 100%;*/
+  -webkit-transform: rotateY(90deg);
+          transform: rotateY(90deg);
+}
+.container:nth-child(2) {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  /*景深相当于眼睛距离元素的位置距离*/
+  -webkit-perspective: 500px;
+          perspective: 500px;
+  overflow: hidden;
+}
+.container:nth-child(2):before {
+  width: 100%;
+  height: 50%;
+  top: 0;
+  left: 0;
+  -webkit-transform-origin: 0 0;
+      -ms-transform-origin: 0 0;
+          transform-origin: 0 0;
+}
+.container:nth-child(2):after {
+  width: 100%;
+  height: 50%;
+  bottom: 0;
+  left: 0;
+  -webkit-transform-origin: 0 100%;
+      -ms-transform-origin: 0 100%;
+          transform-origin: 0 100%;
+}
+.container:nth-child(2):hover:before {
+  /* 左右滑动打开 ,要加overflow: hidden; */
+  top: -50%;
+  /* 给变宽度 */
+  /* height: 0%; */
+  /* 使用旋转打开 ，开窗式 ，分为里开和外开 ，要改变旋转轴 transform-origin: 0 0;*/
+  /* transform: rotateX(90deg) */
+}
+.container:nth-child(2):hover:after {
+  /* 左右滑动打开 */
+  bottom: -50% /* 给变宽度 */ /* height: 0%; */ /* 使用旋转打开 ，开窗式 ，分为里开和外开，要改变旋转轴 transform-origin: 0 100%;*/ /* transform: rotateX(-90deg) */;
+}
+.container:nth-child(3) {
+  overflow: hidden;
+}
+.container:nth-child(3):before {
+  background-color: rgba(38, 228, 70, 0.35);
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+          transform: translate3d(-50%, -50%, 0);
+}
+.container:nth-child(3):after {
+  background-color: rgba(38, 228, 70, 0.35);
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+          transform: translate3d(-50%, -50%, 0);
+}
+.container:nth-child(3):hover:before {
+  /* 给变宽度 */
+  /*  width: 0; */
+  /* 使用过度 */
+  -webkit-transform: translate3d(-50%, -50%, 0) rotateY(90deg);
+          transform: translate3d(-50%, -50%, 0) rotateY(90deg);
+}
+.container:nth-child(3):hover:after {
+  /* 给变宽度 */
+  /* height: 0; */
+  /* 使用过度 */
+  -webkit-transform: translate3d(-50%, -50%, 0) rotateX(90deg);
+          transform: translate3d(-50%, -50%, 0) rotateX(90deg);
+}
+.container:nth-child(4) {
+  overflow: hidden;
+}
+.container:nth-child(4):before {
+  background-color: rgba(38, 228, 70, 0.35);
+  width: 200%;
+  height: 200%;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  -webkit-transition: all 1s ease 0s;
+  -o-transition: all 1s ease 0s;
+  transition: all 1s ease 0s;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+          transform: translate3d(-50%, -50%, 0);
+}
+.container:nth-child(4):after {
+  background-color: rgba(38, 228, 70, 0.35);
+  width: 200%;
+  height: 200%;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  -webkit-transition: all 1s ease 0.1s;
+  -o-transition: all 1s ease 0.1s;
+  transition: all 1s ease 0.1s;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+          transform: translate3d(-50%, -50%, 0);
+}
+.container:nth-child(4):hover:before {
+  width: 0;
+  height: 0;
+}
+.container:nth-child(4):hover:after {
+  width: 0;
+  height: 0;
+}
+.container:nth-child(5) {
+  overflow: hidden;
+}
+.container:nth-child(5):before {
+  background-color: rgba(38, 228, 70, 0.35);
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  -webkit-transition: all .5s ease 0s;
+  -o-transition: all .5s ease 0s;
+  transition: all .5s ease 0s;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+          transform: translate3d(-50%, -50%, 0);
+}
+.container:nth-child(5):after {
+  background-color: rgba(38, 228, 70, 0.35);
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  -webkit-transition: all .5s ease 0s;
+  -o-transition: all .5s ease 0s;
+  transition: all .5s ease 0s;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+          transform: translate3d(-50%, -50%, 0);
+}
+.container:nth-child(5):hover:before {
+  /* 上下分开 */
+  /* transform: translate3d(-50%, 50%, 0) rotate(90deg) */
+  /* 左右分开 */
+  -webkit-transform: translate3d(50%, -50%, 0) rotate(90deg);
+          transform: translate3d(50%, -50%, 0) rotate(90deg);
+}
+.container:nth-child(5):hover:after {
+  /* 上下分开 */
+  /* transform: translate3d(-50%, -150%, 0) rotate(90deg) */
+  /* 左右分开 */
+  -webkit-transform: translate3d(-150%, -50%, 0) rotate(90deg);
+          transform: translate3d(-150%, -50%, 0) rotate(90deg);
+}
+.container:nth-child(6) {
+  overflow: hidden;
+}
+.container:nth-child(6):before {
+  display: block;
+  background-color: rgba(38, 228, 70, 0.35);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  -webkit-transition: all 1s ease 0s;
+  -o-transition: all 1s ease 0s;
+  transition: all 1s ease 0s;
+}
+.container:nth-child(6):after {
+  display: block;
+  background-color: rgba(38, 228, 70, 0.35);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  -webkit-transition: all 1s ease 0s;
+  -o-transition: all 1s ease 0s;
+  transition: all 1s ease 0s;
+}
+.container:nth-child(6):hover:before {
+  -webkit-transform: skew(90deg);
+      -ms-transform: skew(90deg);
+          transform: skew(90deg);
+}
+.container:nth-child(6):hover:after {
+  -webkit-transform: skew(-90deg);
+      -ms-transform: skew(-90deg);
+          transform: skew(-90deg);
+}
+@-webkit-keyframes beat {
+  from,
+  to {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+  25% {
+    -webkit-transform: scale(0.9, 1.1);
+    transform: scale(0.9, 1.1);
+  }
+  50% {
+    -webkit-transform: scale(1.1, 0.9);
+    transform: scale(1.1, 0.9);
+  }
+  75% {
+    -webkit-transform: scale(0.95, 1.05);
+    transform: scale(0.95, 1.05);
+  }
+  from,
+  to {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+  25% {
+    -webkit-transform: scale(0.9, 1.1);
+    transform: scale(0.9, 1.1);
+  }
+  50% {
+    -webkit-transform: scale(1.1, 0.9);
+    transform: scale(1.1, 0.9);
+  }
+  75% {
+    -webkit-transform: scale(0.95, 1.05);
+    transform: scale(0.95, 1.05);
+  }
+}
+@keyframes beat {
+  from,
+  to {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+  25% {
+    -webkit-transform: scale(0.9, 1.1);
+    transform: scale(0.9, 1.1);
+  }
+  50% {
+    -webkit-transform: scale(1.1, 0.9);
+    transform: scale(1.1, 0.9);
+  }
+  75% {
+    -webkit-transform: scale(0.95, 1.05);
+    transform: scale(0.95, 1.05);
+  }
+  from,
+  to {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+  25% {
+    -webkit-transform: scale(0.9, 1.1);
+    transform: scale(0.9, 1.1);
+  }
+  50% {
+    -webkit-transform: scale(1.1, 0.9);
+    transform: scale(1.1, 0.9);
+  }
+  75% {
+    -webkit-transform: scale(0.95, 1.05);
+    transform: scale(0.95, 1.05);
+  }
+}
