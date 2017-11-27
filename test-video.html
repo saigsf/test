@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./src/css/video.css">
+</head>
+
+<body>
+    <!-- 62ea515575b8454f82fb606c62eb3b1b -->
+    <video id="media" width="600" height="400">
+        <source src="http://mvideo.spriteapp.cn/video/2017/1122/5a15240654136_wpc.mp4" />
+    </video>
+    <div class="ctrl">
+        <input class="prevBtn" type="button" value="上一个">
+        <input class="ctrlBtn" type="button" value="播放">
+        <input class="nextBtn" type="button" value="下一个">
+        <input class="voiceBtn" type="button" value="静音/no">
+        <input class="speadX2" type="button" value="X2">
+        <input class="speadX4" type="button" value="X4">
+        <input class="speadX8" type="button" value="X8">
+        <progress value="0" max="100"><ie style="width:20%;"></ie></progress>
+
+    </div>
+</body>
+<script src="./src/js/jquery-3.1.1.min.js"></script>
+
+<script>
+    if (typeof window.screenX !== "number") {
+        document.createElement("progress");
+        document.createElement("ie");
+    }
+    /**
+     * 视频数据接口测试
+     */
+
+    var opt = {
+        type: 'GET',
+        url: 'https://route.showapi.com/255-1',
+        data: {
+            page: 1,
+            showapi_appid: 46443,
+            type: 41,
+            showapi_sign: '62ea515575b8454f82fb606c62eb3b1b'
+        }
+    }
+
+    $.ajax(opt).then(function(res) {
+        var data = res.showapi_res_body.pagebean.contentlist;
+        console.log(data);
+        changeURL(data)
+    }, function(err) {
+        console.log(err)
+    })
+
+    var changeURL = function(data) {
+        /* data必须是数组 */
+        var index = 0;
+        var Media = document.getElementById("media");
+
+        $('.nextBtn').click(function() {
+            index++;
+            if (index >= data.length) {
+                index = 0
+            }
+            $('video source').attr('src', data[index].video_uri)
+            Media.load();
+            Media.play();
+        })
+        $('.prevBtn').click(function() {
+            index--;
+            if (index < 0) {
+                index = data.length - 1
+            }
+            $('video source').attr('src', data[index].video_uri)
+            Media.load();
+            Media.play();
+        })
+        $('.ctrlBtn').click(function() {
+            //Media.load(); // 重新加载
+            console.log(Media.currentTime); // 当前播放的位置
+            console.log(Media.duration); // 当前视屏的长度
+            // console.log(Media.paused); // 是否暂停
+            if (Media.paused) {
+                Media.play();
+                this.value = '暂停';
+                $('progress').attr('value', Media.currentTime);
+                $('progress').attr('max', Media.duration);
+            } else {
+                Media.pause();
+                this.value = '播放';
+                $('progress').attr('value', Media.currentTime);
+                $('progress').attr('max', Media.duration);
+            }
+
+        })
+
+        console.log($('progress').labels)
+
+        var autoChange = function() {
+            if (Media.currentTime == Media.duration) {
+                index++;
+            }
+
+            if (index >= data.length) {
+                index = 0
+            }
+            $('video source').attr('src', data[index].video_uri)
+            Media.load();
+            Media.play();
+            $('progress').attr('value', Media.currentTime);
+            $('progress').attr('max', Media.duration);
+        }
+        autoChange();
+
+
+
+
+
+    }
+</script>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>calendar</title>
+    <link rel="stylesheet" href="./src/css/reset.min.css">
+    <link rel="stylesheet" href="./src/css/calendar.css">
+</head>
+
+<body>
+    <div class="container"></div>
+    <div class="btnCtrl">
+        <!-- <input class="reset" type="button" value="重置"> -->
+        <input class="change" type="button" value="换图片">
+        <!-- <input class="url" type="text" value="" placeholder="请输入图片链接">
+        <input class="ok" type="button" value="确定"> -->
+
+    </div>
+    <div class="img">
+        <img src="./src/img/1490073118356.jpg" alt="参考图片">
+    </div>
+
+
+    <script type="text/template" id="dialogTpl">
+        <div class="mydialog">
+            <span class="close">×</span>
+            <div class="mydialog-cont">
+                <div class="cont">
+                    <% this.content %>
+                </div>
+            </div>
+            <div class="footer">
+                <% if(this.cancel){ %>
+                    <span class="btn btn-ok"><% this.ok_txt %></span>
+                    <span class="btn btn-cancel"><% this.cancel_txt %></span>
+                    <% } else{ %>
+                        <span class="btn btn-ok" style="width: 100%"><% this.ok_txt %></span>
+                        <% } %>
+            </div>
+        </div>
+    </script>
+
+
+    <script src="./src/js/jquery-3.1.1.min.js"></script>
+    <script src="./src/js/unit.js"></script>
+    <script src="./src/js/division.js"></script>
+    <!-- <script src="./src/js/calendar.js"></script>    -->
+    <script>
+        window.onload = function() {
+            window.initdefault();
+            var division = new Division({
+                el: document.getElementsByClassName("container")[0],
+                rows: 1,
+                cols: 4,
+                isEvents: false,
+                isEventsSub: true
+            });
+            window.onresize = function() {
+                window.initdefault();
+                division.resize();
+            }
+
+            console.log(division);
+            division.on(function(obj) {
+                    console.log(obj)
+                })
+                // division.randomSplit()
+
+            // var reset = document.getElementsByClassName("reset")[0];
+            var change = document.getElementsByClassName("change")[0];
+            // var url = document.getElementsByClassName("url")[0];
+            // var ok = document.getElementsByClassName("ok")[0];
+            var img = document.getElementsByTagName("img")[0];
+            // console.log(reset, change, url, ok, img)
+
+
+            var imgURL = ['./src/img/1490073118356.jpg',
+                './src/img/1490338321679.jpg',
+                'http://img05.tooopen.com/images/20140404/sy_58241958989.jpg',
+                'http://pic4.nipic.com/20091217/3885730_124701000519_2.jpg'
+            ];
+            var index = 0;
+            change.onclick = function() {
+                index++;
+                if (index >= imgURL.length) {
+                    index = 0;
+                }
+                division.changeBgimg(imgURL[index]);
+                img.src = imgURL[index];
+
+            }
+
+
+
+
+
+
+
+
+        }
+    </script>
+</body>
+
+</html>

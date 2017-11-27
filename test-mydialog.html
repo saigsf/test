@@ -3,25 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>calendar</title>
+    <title>Document</title>
     <link rel="stylesheet" href="./src/css/reset.min.css">
-    <link rel="stylesheet" href="./src/css/calendar.css">
+    <link rel="stylesheet" href="./src/css/mydialog.css">
 </head>
 
 <body>
-    <div class="container"></div>
-    <div class="btnCtrl">
-        <!-- <input class="reset" type="button" value="重置"> -->
-        <input class="change" type="button" value="换图片">
-        <!-- <input class="url" type="text" value="" placeholder="请输入图片链接">
-        <input class="ok" type="button" value="确定"> -->
-
-    </div>
-    <div class="img">
-        <img src="./src/img/1490073118356.jpg" alt="参考图片">
-    </div>
-
 
     <script type="text/template" id="dialogTpl">
         <div class="mydialog">
@@ -42,12 +31,21 @@
         </div>
     </script>
 
+    <script src="./src/js/mydialog.js"></script>
+    <script>
+        var mydialog = new MyDialog({
+            tmpId: 'dialogTpl',
+            cancel: true,
+            content: 'hello world!'
+        });
+        mydialog.on('confirm', function(ev) {
+            console.log('you click confirm!');
+            // 写你的确定之后的逻辑代码...
+        });
 
-    <script src="./src/js/jquery-3.1.1.min.js"></script>
-    <script src="./src/js/unit.js"></script>
-    <script src="./src/js/bgp.plugin.js"></script>
+        mydialog.show();
+    </script>
 
-    <script src="./src/js/calendar.js"></script>
 </body>
 
 </html>

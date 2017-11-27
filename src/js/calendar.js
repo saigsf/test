@@ -4,7 +4,7 @@ window.onload = function() {
         el: document.getElementsByClassName("container")[0],
         rows: 7,
         cols: 7,
-        isEvents: false,
+        isEvents: true,
         isEventsSub: true
     });
     window.onresize = function() {
@@ -38,10 +38,11 @@ window.onload = function() {
 
     }
 
-    // ok.onclick = function() {
-    //     var urlText = url.value;
-    //     d.changeBgimg(urlText);
-    //     img.src = urlText;
-    // }
+
+
+
+
+
+
 
 }

@@ -185,124 +185,45 @@
     window.fetchComputedStyle = fetchComputedStyle;
 })();
 
+/* jQuery 插件模式 */
+(function(factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        // Node/CommonJS style for Browserify
+        module.exports = factory;
+    } else {
+        // Browser globals
+        factory(jQuery);
+    }
+})(function($) {
+    $.fn.extend({
+            // Division: window.Division
+        })
+        // console.log($.fn)
+})
+
 /**
- * 背景分裂效果
- * 作者：Saber
- * 时间：2017/11/23
+ * 不依赖环境的插件
  */
-(function() {
-    var Division = function(opt) {
-        this.el = opt.el; //盒子元素
-        this.rows = opt.rows > 1 ? opt.rows : 4; // 行数
-        this.cols = opt.rows > 1 ? opt.rows : 4; // 列数
-        this.isEvents = opt.isEvents ? 1 : 0;
-        this.isEventsSub = opt.isEventsSub ? 1 : 0;
-        this.totalNum = opt.rows * opt.cols;
-        this.totalWidth = parseFloat(window.fetchComputedStyle(this.el, 'width')) - this.hasBorder(this.el) * 2; // 盒子的宽度
-        this.totalHeight = parseFloat(window.fetchComputedStyle(this.el, 'height')) - this.hasBorder(this.el) * 2; // 盒子的高度
-        this.subWidth = this.totalWidth / this.cols; // 每一小块儿的宽度
-        this.subHeight = this.totalHeight / this.rows; // 每一小块儿的高度
-        this.offsetsX = 0;
-        this.offsetsY = 0;
-        this.oDivs = [];
-        // console.log(this.hasBorder(this.el))
 
-        this.init();
+;
+(function(undefined) {
+    "use strict"
+    var _global;
+    var jSaber = {
 
+    };
 
-    }
-    Division.prototype.init = function() {
-        for (var i = 0; i < this.totalNum; i++) {
-            this.oDivs.push(document.createElement("div"));
-        }
-        this.render();
-        this.isEvents === 0 || this.events().enter();
-        this.isEvents === 0 || this.events().leave();
-        this.isEventsSub === 0 || this.subEvents().over();
-        this.isEventsSub === 0 || this.subEvents().out();
-    }
-    Division.prototype.render = function() {
-        /* 每次渲染都要重新计算 盒子的宽度和高度 */
-        this.totalWidth = parseFloat(window.fetchComputedStyle(this.el, 'width')); // 盒子的宽度
-        this.totalHeight = parseFloat(window.fetchComputedStyle(this.el, 'height')); // 盒子的高度
-        this.subWidth = this.totalWidth / this.cols; // 每一小块儿的宽度
-        this.subHeight = this.totalHeight / this.rows; // 每一小块儿的高度
-        for (var i = 0; i < this.totalNum; i++) {
-            // this.offsetsX = Math.floor(Math.random() * 200 - 100);
-            this.oDivs[i].style.width = this.subWidth + "px";
-            this.oDivs[i].style.height = this.subHeight + "px";
-            this.oDivs[i].style.top = this.offsetsX + "px";
-            this.oDivs[i].style.left = this.offsetsY + "px";
-            this.oDivs[i].style.backgroundSize = this.totalWidth + "px " + this.totalHeight + "px";
-            this.oDivs[i].style.backgroundPosition = -i % this.cols * this.subWidth + "px " + -Math.floor(i / this.rows) * this.subHeight + "px";
-
-            this.el.appendChild(this.oDivs[i]);
-        }
-    }
-    Division.prototype.events = function(callback) {
-        return {
-            enter: () => {
-                this.el.onmouseenter = () => {
-                    for (var i = 0; i < this.totalNum; i++) {
-                        this.offsetsX = Math.floor(Math.random() * 2 * this.subWidth - this.subWidth);
-                        this.offsetsY = Math.floor(Math.random() * 2 * this.subHeight - this.subHeight);
-                        this.oDivs[i].style.top = this.offsetsX + "px";
-                        this.oDivs[i].style.left = this.offsetsX + "px";
-                    }
-                }
-            },
-            leave: () => {
-                this.el.onmouseleave = () => {
-                    this.reset()
-                }
-            },
-            callback: callback
-        }
+    // 最后将插件对象暴露给全局对象
+    _global = (function() { return this || (0, eval)('this'); }());
+    if (typeof module !== "undefined" && module.exports) {
+        module.exports = jSaber;
+    } else if (typeof define === "function" && define.amd) {
+        define(function() { return jSaber; });
+    } else {
+        !('jSaber' in _global) && (_global.jSaber = jSaber);
     }
 
-
-    Division.prototype.subEvents = function() {
-        return {
-            over: () => {
-                for (var i = 0; i < this.totalNum; i++) {
-                    this.oDivs[i].onmouseover = function() {
-                        this.style.webkitBoxShadow = '0 0 0.4rem #066ef5';
-                        this.style.boxShadow = '0 0 0.4rem #066ef5';
-                        this.style.webkitTransform = 'translateZ(2rem)';
-                        this.style.transform = 'translateZ(2rem)';
-
-                    }
-
-                }
-            },
-            out: () => {
-                for (var i = 0; i < this.totalNum; i++) {
-                    this.oDivs[i].onmouseout = function() {
-                        this.style.webkitBoxShadow = 'none';
-                        this.style.boxShadow = 'none';
-                        this.style.webkitTransform = 'translateZ(0rem)';
-                        this.style.transform = 'translateZ(0rem)';
-                    }
-                }
-            }
-        }
-    }
-
-    Division.prototype.changeBgimg = function(url) {
-
-        for (var i = 0; i < this.totalNum; i++) {
-            this.oDivs[i].style.backgroundImage = 'url(' + url + ')'; // background-image: url("../img/1490073118356.jpg");
-        }
-    }
-    Division.prototype.hasBorder = function(el) {
-
-        return parseInt(window.fetchComputedStyle(el, 'borderWidth'))
-    }
-    Division.prototype.reset = function() {
-        for (var i = 0; i < this.totalNum; i++) {
-            this.oDivs[i].style.top = 0 + "px";
-            this.oDivs[i].style.left = 0 + "px";
-        }
-    }
-    window.Division = Division;
-})();
+}());
