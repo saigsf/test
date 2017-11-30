@@ -26,19 +26,7 @@
             return;    
         }    
         var nHtml =
-            '<div class="mt-number-animate-dom" data-num="{{num}}">\
-                    <span class="mt-number-animate-span">0</span>\
-                    <span class="mt-number-animate-span">1</span>\
-                    <span class="mt-number-animate-span">2</span>\
-                    <span class="mt-number-animate-span">3</span>\
-                    <span class="mt-number-animate-span">4</span>\
-                    <span class="mt-number-animate-span">5</span>\
-                    <span class="mt-number-animate-span">6</span>\
-                    <span class="mt-number-animate-span">7</span>\
-                    <span class="mt-number-animate-span">8</span>\
-                    <span class="mt-number-animate-span">9</span>\
-                    <span class="mt-number-animate-span">.</span>\
-                  </div>';       //数字处理
+            '<div class="mt-number-animate-dom" data-num="{{num}}"><span class="mt-number-animate-span">0</span><span class="mt-number-animate-span">1</span><span class="mt-number-animate-span">2</span><span class="mt-number-animate-span">3</span><span class="mt-number-animate-span">4</span><span class="mt-number-animate-span">5</span><span class="mt-number-animate-span">6</span><span class="mt-number-animate-span">7</span><span class="mt-number-animate-span">8</span><span class="mt-number-animate-span">9</span><span class="mt-number-animate-span">.</span></div>';       //数字处理
             
         var numToArr = function(num) {      
                 num = parseFloat(num).toFixed(setting.dot);      
@@ -70,7 +58,7 @@
                     var num = $(this).attr("data-num");        
                     num = (num == "." ? 10 : num);        
                     var spanHei = $(this).height() / 11; //11为元素个数
-                            
+                    console.log(spanHei)
                     var thisTop = -num * spanHei + "px";        
                     if (thisTop != $(this).css("top")) {          
                         if (setting.iniAnimate) {             //HTML5不支持
@@ -82,25 +70,15 @@
                             } else {              
                                 $(this).css({                
                                     'transform': 'translateY(' + thisTop + ')',
-                                                    '-ms-transform': 'translateY(' +
-                                        thisTop + ')',
-                                       /* IE 9 */                 '-moz-transform': 'translateY(' +
-                                        thisTop + ')',
-                                      /* Firefox */                 '-webkit-transform': 'translateY(' +
-                                        thisTop + ')',
-                                    /* Safari 和 Chrome */
-                                                    '-o-transform': 'translateY(' + thisTop +
-                                        ')',
-                                                    '-ms-transition': setting.speed / 1000 +
-                                        's',
-                                                    '-moz-transition': setting.speed / 1000 +
-                                        's',
-                                                    '-webkit-transition': setting.speed /
-                                        1000 + 's',
-                                                    '-o-transition': setting.speed / 1000 +
-                                        's',
-                                                    'transition': setting.speed / 1000 +
-                                        's'              
+                                    '-ms-transform': 'translateY(' + thisTop + ')',
+                                    '-moz-transform': 'translateY(' + thisTop + ')',
+                                    '-webkit-transform': 'translateY(' + thisTop + ')',
+                                    '-o-transform': 'translateY(' + thisTop + ')',
+                                    '-ms-transition': setting.speed / 1000 + 's',
+                                    '-moz-transition': setting.speed / 1000 + 's',
+                                    '-webkit-transition': setting.speed / 1000 + 's',
+                                    '-o-transition': setting.speed / 1000 + 's',
+                                    'transition': setting.speed / 1000 + 's'              
                                 });            
                             }          
                         } else {            

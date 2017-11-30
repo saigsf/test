@@ -63,6 +63,8 @@
                 ok_txt: '确定',
                 cancel: false,
                 cancel_txt: '取消',
+                input: false,
+                input_text: '请输入···',
                 confirm: function() {},
                 close: function() {},
                 content: '',

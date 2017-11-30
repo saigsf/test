@@ -41,7 +41,7 @@
                 isEventsSub: true
             }
 
-            this.def = Division.merge(def, opt, true); //配置参数
+            this.def = this.extend(def, opt); //配置参数
             this.version = version;
             el = this.def.el; //盒子元素
             rows = this.def.rows > 1 ? this.def.rows : 1; // 行数
@@ -57,7 +57,7 @@
             offsetsY = 0;
             oDivs = [];
             this._render();
-            isEvents === 0 || this.events();
+            isEvents === 0 || Division.events();
             isEventsSub === 0 || this.subDivision();
         },
         _render: function() {
@@ -71,37 +71,42 @@
             subHeight = totalHeight / rows; // 每一小块儿的高度
             for (var i = 0; i < totalNum; i++) {
                 // offsetsX = Math.floor(Math.random() * 200 - 100);
-                oDivs[i].style.width = subWidth + "px";
-                oDivs[i].style.height = subHeight + "px";
-                oDivs[i].style.top = offsetsX + "px";
-                oDivs[i].style.left = offsetsY + "px";
-                oDivs[i].style.backgroundSize = totalWidth + "px " + totalHeight + "px";
+
+                this.css.call(oDivs[i], {
+                    width: subWidth + "px",
+                    height: subHeight + "px",
+                    top: offsetsX + "px",
+                    left: offsetsY + "px",
+                    backgroundSize: totalWidth + "px " + totalHeight + "px"
+                });
                 if (cols === 1 && rows !== 1) {
-                    oDivs[i].style.backgroundPosition = 0 + "px " + -Math.floor(i / rows) * subHeight + "px";
+                    this.css.call(oDivs[i], {
+                        backgroundPosition: 0 + "px " + -Math.floor(i / rows) * subHeight + "px"
+                    });
                 } else if (cols !== 1 && rows === 1) {
-                    oDivs[i].style.backgroundPosition = -i % cols * subWidth + "px " + 0 + "px";
+                    this.css.call(oDivs[i], {
+                        backgroundPosition: -i % cols * subWidth + "px " + 0 + "px"
+                    });
 
                 } else {
-                    oDivs[i].style.backgroundPosition = -i % cols * subWidth + "px " + -Math.floor(i / rows) * subHeight + "px";
+                    this.css.call(oDivs[i], {
+                        backgroundPosition: -i % cols * subWidth + "px " + -Math.floor(i / rows) * subHeight + "px"
+                    });
+
                 }
 
                 el.appendChild(oDivs[i]);
             }
         },
 
-        /* 分裂的触发事件 */
-        events: function() {
-            Division.on(function(obj) {
-                el.onmouseenter = () => {
-                    obj.randomSplit();
 
-                }
-                el.onmouseleave = () => {
-                    Division.reset();
-
-                }
-            });
-            !callback || callback(this);
+        css: function(styleObj) {
+            for (var prop in styleObj) {
+                var attr = prop.replace(/[A-Z]/g, function(word) {
+                    return '-' + word.toLowerCase();
+                });
+                this.style[attr] = styleObj[prop];
+            }
             return this;
         },
 
@@ -114,48 +119,77 @@
         hasBorder: function(el) {
             return parseInt(Division.fetchComputedStyle(el, 'borderWidth'))
         },
-        randomSplit: (callback) => {
+        randomSplit: function(callback) {
             for (var i = 0; i < totalNum; i++) {
                 offsetsX = Math.floor(Math.random() * 2 * subWidth - subWidth);
                 offsetsY = Math.floor(Math.random() * 2 * subHeight - subHeight);
-                oDivs[i].style.top = offsetsX + "px";
-                oDivs[i].style.left = offsetsX + "px";
+                this.css.call(oDivs[i], {
+                    top: offsetsX + "px",
+                    left: offsetsX + "px"
+                });
             };
             !callback || callback(this);
             return this;
         },
-        subDivision: (index, callback) => {
+        subDivision: function(index, callback) {
             if (index && index >= 0 && index < oDivs.length) {
-                oDivs[index].onmouseover = function() {
-                    this.style.webkitBoxShadow = '0 0 0.4rem #066ef5';
-                    this.style.boxShadow = '0 0 0.4rem #066ef5';
-                    this.style.webkitTransform = 'translateZ(2rem)';
-                    this.style.transform = 'translateZ(2rem)';
+                oDivs[index].onmouseover = () => {
+                    this.css.call(oDivs[index], {
+                        webkitBoxShadow: '0 0 0.4rem #066ef5',
+                        boxShadow: '0 0 0.4rem #066ef5',
+                        webkitTransform: 'translateZ(2rem)',
+                        transform: 'translateZ(2rem)'
+                    });
                     !callback || callback(this)
                 }
-                oDivs[index].onmouseout = function() {
-                    this.style.webkitBoxShadow = 'none';
-                    this.style.boxShadow = 'none';
-                    this.style.webkitTransform = 'translateZ(0rem)';
-                    this.style.transform = 'translateZ(0rem)';
+                oDivs[index].onmouseout = () => {
+                    this.css.call(oDivs[index], {
+                        webkitBoxShadow: 'none',
+                        boxShadow: 'none',
+                        webkitTransform: 'translateZ(0rem)',
+                        transform: 'translateZ(0rem)'
+                    });
                 }
 
             } else {
+                oDivs.forEach(oDiv => {
+                    this.css.call(oDiv, {
+                        webkitBoxShadow: '0 0 0.4rem #066ef5',
+                        boxShadow: '0 0 0.4rem #066ef5',
+                        webkitTransform: 'translateZ(2rem)',
+                        transform: 'translateZ(2rem)'
+                    });
+                });
+
+                oDivs.forEach(oDiv => {
+                    this.css.call(oDivs[i], {
+                        webkitBoxShadow: '0 0 0.4rem #066ef5',
+                        boxShadow: '0 0 0.4rem #066ef5',
+                        webkitTransform: 'translateZ(2rem)',
+                        transform: 'translateZ(2rem)'
+                    });
+                });
+
                 for (var i = 0; i < totalNum; i++) {
-                    oDivs[i].onmouseover = function() {
-                        this.style.webkitBoxShadow = '0 0 0.4rem #066ef5';
-                        this.style.boxShadow = '0 0 0.4rem #066ef5';
-                        this.style.webkitTransform = 'translateZ(2rem)';
-                        this.style.transform = 'translateZ(2rem)';
+                    oDivs[i].onmouseover = () => {
+                        console.log(this)
+                        this.css.call(oDivs[i], {
+                            webkitBoxShadow: '0 0 0.4rem #066ef5',
+                            boxShadow: '0 0 0.4rem #066ef5',
+                            webkitTransform: 'translateZ(2rem)',
+                            transform: 'translateZ(2rem)'
+                        });
 
                     }
                 }
                 for (var i = 0; i < totalNum; i++) {
-                    oDivs[i].onmouseout = function() {
-                        this.style.webkitBoxShadow = 'none';
-                        this.style.boxShadow = 'none';
-                        this.style.webkitTransform = 'translateZ(0rem)';
-                        this.style.transform = 'translateZ(0rem)';
+                    oDivs[i].onmouseout = () => {
+                        this.css.call(oDivs[i], {
+                            webkitBoxShadow: 'none',
+                            boxShadow: 'none',
+                            webkitTransform: 'translateZ(0rem)',
+                            transform: 'translateZ(0rem)'
+                        });
                     }
                 }
             };
@@ -320,6 +354,19 @@
                 oDivs[i].style.left = 0 + "px";
             }
         },
+        /* 分裂的触发事件 */
+        events: function(callback) {
+
+            el.onmouseenter = () => {
+                randomSplit();
+            }
+            el.onmouseleave = () => {
+                Division.reset();
+
+            };
+            !callback || callback(this);
+            return this;
+        },
 
 
     })
@@ -330,13 +377,21 @@
     }
 
 
-
+    var randomSplit = (callback) => {
+        for (var i = 0; i < totalNum; i++) {
+            offsetsX = Math.floor(Math.random() * 2 * subWidth - subWidth);
+            offsetsY = Math.floor(Math.random() * 2 * subHeight - subHeight);
+            oDivs[i].style.top = offsetsX + "px";
+            oDivs[i].style.left = offsetsX + "px";
+        };
+    }
 
     // 最后将插件对象暴露给全局对象
 
     if (typeof module !== "undefined" && module.exports) {
         module.exports = Division;
-    } else if (typeof define === "function" && define.amd) {
+    } else
+    if (typeof define === "function" && define.amd) {
         define(function() { return Division; });
     } else {
         !('Division' in _global) && (_global.Division = Division);

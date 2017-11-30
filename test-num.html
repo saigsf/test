@@ -65,47 +65,14 @@
 <script src="./src/js/numberAnimate.js"></script>
 <script>
     $(function() {     //初始化
-          
+        var nums = 15343242.10; 
         var numRun = $(".numberRun").numberAnimate({
-            num: '15343242.10',
+            num: nums + '',
             dot: 2,
             speed: 2000,
             symbol: ","
-        });  
-        var nums = 15343242.10;  
-        // setInterval(function() {    
-        //     nums += 3433.24;    
-        //     numRun.resetData(nums);  
-        // }, 3000);      
-        var numRun2 = $(".numberRun2").numberAnimate({
-            num: '15343242',
-            speed: 2000,
-            symbol: ","
-        });  
-        var nums2 = 15343242;  
-        // setInterval(function() {    
-        //     nums2 += 1433;    
-        //     numRun2.resetData(nums2);  
-        // }, 2000);      
-        var numRun3 = $(".numberRun3").numberAnimate({
-            num: '52353434.343',
-            dot: 3,
-            speed: 2000
-        });  
-        var nums3 = 52353434.343;  
-        // setInterval(function() {    
-        //     nums3 += 454.521;    
-        //     numRun3.resetData(nums3);  
-        // }, 4000);    
-        var numRun4 = $(".numberRun4").numberAnimate({
-            num: '52353434',
-            speed: 2000
-        });  
-        var nums4 = 52353434;  
-        // setInterval(function() {    
-        //     nums4 += 123454;    
-        //     numRun4.resetData(nums4);  
-        // }, 3500);  
+        });   
+
     });
 </script>
 

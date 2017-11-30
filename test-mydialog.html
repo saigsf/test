@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="./src/css/reset.min.css">
+    <!-- <link rel="stylesheet" href="./src/css/reset.min.css"> -->
     <link rel="stylesheet" href="./src/css/mydialog.css">
 </head>
 
@@ -16,9 +16,17 @@
         <div class="mydialog">
             <span class="close">×</span>
             <div class="mydialog-cont">
-                <div class="cont">
-                    <% this.content %>
-                </div>
+                <% if(!this.input){ %>
+                    <div class="cont">
+                        <% this.content %>
+                    </div>
+                    <% } else{ %>
+                        <div class="cont">
+                            <input type="text" value="<% this.input_text %>">
+                        </div>
+                        <% } %>
+
+
             </div>
             <div class="footer">
                 <% if(this.cancel){ %>
@@ -36,7 +44,8 @@
         var mydialog = new MyDialog({
             tmpId: 'dialogTpl',
             cancel: true,
-            content: 'hello world!'
+            content: 'hello world!',
+            input: true
         });
         mydialog.on('confirm', function(ev) {
             console.log('you click confirm!');
