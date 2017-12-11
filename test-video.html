@@ -11,18 +11,45 @@
 
 <body>
     <!-- 62ea515575b8454f82fb606c62eb3b1b -->
-    <video id="media" width="600" height="400">
+    <video id="media" width="600" height="400" controls>
         <source src="http://mvideo.spriteapp.cn/video/2017/1122/5a15240654136_wpc.mp4" />
     </video>
     <div class="ctrl">
-        <input class="prevBtn" type="button" value="上一个">
-        <input class="ctrlBtn" type="button" value="播放">
-        <input class="nextBtn" type="button" value="下一个">
-        <input class="voiceBtn" type="button" value="静音/no">
-        <input class="speadX2" type="button" value="X2">
-        <input class="speadX4" type="button" value="X4">
-        <input class="speadX8" type="button" value="X8">
-        <progress value="0" max="100"><ie style="width:20%;"></ie></progress>
+        <p>
+            <input class="prevBtn" type="button" value="上一个">
+            <input class="ctrlBtn" type="button" value="播放">
+            <input class="nextBtn" type="button" value="下一个"> 
+            <input class="rePlay" type="button" value="重播"> 
+            <input class="fullscreen" type="button" value="全屏"> 
+            </p>
+        <p>
+            播放声音：
+            <input class="voiceBtn" type="button" value="静音/no">
+            <input class="voiceReduce" type="button" value="-">
+            <progress class="voiceBar" value="0" max="100">
+                <span id="objprogress">85</span>%
+                <ie style="width:20%;"></ie>
+            </progress> 
+            <input class="voiceAdd" type="button" value="+">
+        </p>
+        <p>
+            播放速度：
+            <input id="speedX1" class="speed" type="button" value="X1">
+            <input id="speedX1.5" class="speed" type="button" value="X1.5">
+            <input id="speedX2" class="speed" type="button" value="X2">
+            <input id="speedX4" class="speed" type="button" value="X4">
+            <input id="speedX8" class="speed" type="button" value="X8">
+        </p>
+        <p>
+            播放进度：
+            <span class="cur"></span>
+            <progress class="playProg" value="0" max="100">
+                <span id="objprogress">85</span>%
+                <ie style="width:20%;"></ie>
+            </progress>
+            <span class="all"></span>
+        </p>
+        
 
     </div>
 </body>
@@ -50,7 +77,7 @@
 
     $.ajax(opt).then(function(res) {
         var data = res.showapi_res_body.pagebean.contentlist;
-        console.log(data);
+        // console.log(data);
         changeURL(data)
     }, function(err) {
         console.log(err)
@@ -60,7 +87,12 @@
         /* data必须是数组 */
         var index = 0;
         var Media = document.getElementById("media");
-
+        console.log(Media.readyState)
+        Media.load();
+        Media.play();
+        $('.voiceBar').attr('value', Media.volume * $('.voiceBar').attr('max') )
+        
+        // 下一个
         $('.nextBtn').click(function() {
             index++;
             if (index >= data.length) {
@@ -69,7 +101,9 @@
             $('video source').attr('src', data[index].video_uri)
             Media.load();
             Media.play();
+            $('.all').text(parseInt(Media.duration / 60) + ':' + parseInt(Media.duration % 60))
         })
+        // 上一个
         $('.prevBtn').click(function() {
             index--;
             if (index < 0) {
@@ -78,49 +112,101 @@
             $('video source').attr('src', data[index].video_uri)
             Media.load();
             Media.play();
+            $('.all').text(parseInt(Media.duration / 60) + ':' + parseInt(Media.duration % 60))
         })
+        // 暂停/播放
         $('.ctrlBtn').click(function() {
             //Media.load(); // 重新加载
-            console.log(Media.currentTime); // 当前播放的位置
-            console.log(Media.duration); // 当前视屏的长度
             // console.log(Media.paused); // 是否暂停
             if (Media.paused) {
                 Media.play();
-                this.value = '暂停';
-                $('progress').attr('value', Media.currentTime);
-                $('progress').attr('max', Media.duration);
+                this.value = '播放';
+                $('.playProg').attr('value', Media.currentTime);
+                $('.playProg').attr('max', Media.duration);
             } else {
                 Media.pause();
-                this.value = '播放';
-                $('progress').attr('value', Media.currentTime);
-                $('progress').attr('max', Media.duration);
+                this.value = '暂停';
+                $('.playProg').attr('value', Media.currentTime);
+                $('.playProg').attr('max', Media.duration);
             }
 
         })
 
-        console.log($('progress').labels)
-
-        var autoChange = function() {
-            if (Media.currentTime == Media.duration) {
-                index++;
-            }
-
-            if (index >= data.length) {
-                index = 0
-            }
-            $('video source').attr('src', data[index].video_uri)
+        // 重播
+        $('.rePlay').click(function(){
             Media.load();
             Media.play();
-            $('progress').attr('value', Media.currentTime);
-            $('progress').attr('max', Media.duration);
-        }
-        autoChange();
+            $('.all').text(parseInt(Media.duration / 60) + ':' + parseInt(Media.duration % 60))
+        })
 
+        // 全屏
+        $('.fullscreen').click(function(){
+            requestFullScreen()
+        })
 
-
+        // 静音/no
+        $('.voiceBtn').click(function () {
+            // console.log(Media.muted)
+            Media.muted = Media.muted ? false : true;
+            $(this).val(Media.muted ? '静音' : '非静音')
+           
+        })
+        // $('.voiceBar')
+        // 音量减
+        $('.voiceReduce').click(function(){
+             $('.voiceBar').attr('value',Math.floor(Math.random()*101))
+            // console.log(Media.volume)
+            Media.volume = $('.voiceBar').attr('value')/ $('.voiceBar').attr('max')
+        })
+        // 音量加
+        $('.voiceAdd').click(function(){
+             $('.voiceBar').attr('value',Math.floor(Math.random()*101))
+            // console.log(Media.volume)
+            Media.volume = $('.voiceBar').attr('value')/ $('.voiceBar').attr('max')
+        })
+        // 播放速度
+        $('.speed').click(function(){
+            console.log($(this).attr('id').slice(6));
+            var speed = parseFloat($(this).attr('id').slice(6));
+            Media.playbackRate = speed;
+        })
+        // 播放进度
+        $('.all').text(parseInt(Media.duration / 60) + ':' + parseInt(Media.duration % 60))
+        setInterval(function () {
+            $('.cur').text(parseInt(Media.currentTime / 60) + ':' + parseInt(Media.currentTime % 60))
+            $('.playProg').val(Media.currentTime)
+        },1000)
 
 
     }
+
+
+
+    //进入全屏
+    
+        function requestFullScreen() {
+            var Media = document.getElementById("media");
+            // var de = document.documentElement;
+            if (Media.requestFullscreen) {
+                Media.requestFullscreen();
+            } else if (Media.mozRequestFullScreen) {
+                Media.mozRequestFullScreen();
+            } else if (Media.webkitRequestFullScreen) {
+                Media.webkitRequestFullScreen();
+            }
+        }
+        //退出全屏
+        function exitFullscreen() {
+            var Media = document.getElementById("media");
+            // var de = document;
+            if (Media.exitFullscreen) {
+                Media.exitFullscreen();
+            } else if (Media.mozCancelFullScreen) {
+                Media.mozCancelFullScreen();
+            } else if (Media.webkitCancelFullScreen) {
+                Media.webkitCancelFullScreen();
+            }
+        }
 </script>
 
 </html>

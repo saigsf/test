@@ -1,0 +1,79 @@
+/* web字体引入 */
+/* 通用样式 */
+.clearfix {
+  zoom: 1;
+}
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+  overflow: hidden;
+}
+/* 自定义滚动条样式 */
+.date {
+  width: 350px;
+  height: auto;
+  margin: 30px auto;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  background: url(http://img05.tooopen.com/images/20140404/sy_58241958989.jpg) no-repeat center;
+  font-size: 12px;
+}
+.date-header {
+  list-style: none;
+  position: relative;
+  top: 0;
+  width: 100%;
+}
+.date-body {
+  position: relative;
+  height: auto;
+  /* 阳历 */
+  /* 阴历 */
+}
+.date-body .solar {
+  height: 25px;
+  line-height: 25px;
+}
+.date-body .lunar {
+  height: 25px;
+  line-height: 25px;
+  font-family: "宋体", "Microsoft Yahei", Arial, sans-serif;
+}
+.date-body div {
+  cursor: pointer;
+}
+.date-body div.cur {
+  background-color: #cc5929;
+}
+.date-body div.curOther {
+  background-color: rgba(204, 89, 41, 0.7);
+}
+.date-body div:hover {
+  background-color: rgba(204, 89, 41, 0.5);
+}
+.date-body div.festival {
+  color: #007acc;
+}
+.date-ctrl {
+  text-align: center;
+}
+.date-ctrl .prevMonth,
+.date-ctrl .nextMonth {
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0);
+}
+.date-header div,
+.date-body div {
+  float: left;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border: 1px solid #ccc;
+  overflow: hidden;
+}
+.date .prevData,
+.date .nextData {
+  color: #999;
+}

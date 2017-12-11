@@ -16,6 +16,7 @@
             你好
         </div>
     </div>
+    <script src="./src/js/jquery.js"></script>
     <script src="./src/js/unit.js"></script>
     <script>
         window.onload = function() {
@@ -28,6 +29,17 @@
                 // });
             }
         }
+        $.ajax({
+            type: 'get',
+            url: './src/php/get-file.php',
+            data: {
+                test: 'Hello World'
+            }
+        }).then(function (res) {
+            console.log(res)
+        },function (err){
+            console.log(err)
+        })
     </script>
 </body>
 

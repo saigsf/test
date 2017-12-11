@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>日历</title>
+    <link rel="stylesheet" href="./src/css/reset.min.css">
+    <link rel="stylesheet" href="./src/css/car.css">
+
+</head>
+
+<body>
+    <div class="container"></div>
+
+
+    <script src="./src/js/getToday.js"></script>
+    <script src="./src/js/getCNdate.js"></script>
+    <script src="./src/js/car.js"></script>
+    <script type="text/javascript">
+        let calender = new Calendar({
+            el: document.querySelector(".container"),
+            type: 'date',
+            data: {
+                title: "www",
+                content: "hhh",
+                name: "saas"
+            }
+        });
+        console.log(calender)
+    </script>
+</body>
+
+</html>
