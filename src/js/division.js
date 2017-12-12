@@ -58,7 +58,7 @@
             oDivs = [];
             this._render();
             isEvents === 0 || Division.events();
-            isEventsSub === 0 || this.subDivision();
+            // isEventsSub === 0 || this.subDivision();
         },
         _render: function() {
             for (var i = 0; i < totalNum; i++) {
@@ -73,10 +73,10 @@
                 // offsetsX = Math.floor(Math.random() * 200 - 100);
 
                 this.css.call(oDivs[i], {
-                    width: subWidth + "px",
-                    height: subHeight + "px",
-                    top: offsetsX + "px",
-                    left: offsetsY + "px",
+                    // width: subWidth + "px",
+                    // height: subHeight + "px",
+                    // top: offsetsX + "px",
+                    // left: offsetsY + "px",
                     backgroundSize: totalWidth + "px " + totalHeight + "px"
                 });
                 if (cols === 1 && rows !== 1) {
@@ -94,7 +94,8 @@
                     });
 
                 }
-
+                oDivs[i].className = "inner";
+                Division.effect(oDivs[i]);
                 el.appendChild(oDivs[i]);
             }
         },
@@ -129,73 +130,6 @@
                 });
             };
             !callback || callback(this);
-            return this;
-        },
-        subDivision: function(index, callback) {
-            if (index && index >= 0 && index < oDivs.length) {
-                oDivs[index].onmouseover = () => {
-                    this.css.call(oDivs[index], {
-                        webkitBoxShadow: '0 0 0.4rem #066ef5',
-                        boxShadow: '0 0 0.4rem #066ef5',
-                        webkitTransform: 'translateZ(2rem)',
-                        transform: 'translateZ(2rem)'
-                    });
-                    !callback || callback(this)
-                }
-                oDivs[index].onmouseout = () => {
-                    this.css.call(oDivs[index], {
-                        webkitBoxShadow: 'none',
-                        boxShadow: 'none',
-                        webkitTransform: 'translateZ(0rem)',
-                        transform: 'translateZ(0rem)'
-                    });
-                }
-
-            } else {
-                oDivs.forEach(oDiv => {
-                    this.css.call(oDiv, {
-                        webkitBoxShadow: '0 0 0.4rem #066ef5',
-                        boxShadow: '0 0 0.4rem #066ef5',
-                        webkitTransform: 'translateZ(2rem)',
-                        transform: 'translateZ(2rem)'
-                    });
-                });
-
-                oDivs.forEach(oDiv => {
-                    this.css.call(oDivs[i], {
-                        webkitBoxShadow: '0 0 0.4rem #066ef5',
-                        boxShadow: '0 0 0.4rem #066ef5',
-                        webkitTransform: 'translateZ(2rem)',
-                        transform: 'translateZ(2rem)'
-                    });
-                });
-
-                for (var i = 0; i < totalNum; i++) {
-                    oDivs[i].onmouseover = () => {
-                        console.log(this)
-                        this.css.call(oDivs[i], {
-                            webkitBoxShadow: '0 0 0.4rem #066ef5',
-                            boxShadow: '0 0 0.4rem #066ef5',
-                            webkitTransform: 'translateZ(2rem)',
-                            transform: 'translateZ(2rem)'
-                        });
-
-                    }
-                }
-                for (var i = 0; i < totalNum; i++) {
-                    oDivs[i].onmouseout = () => {
-                        this.css.call(oDivs[i], {
-                            webkitBoxShadow: 'none',
-                            boxShadow: 'none',
-                            webkitTransform: 'translateZ(0rem)',
-                            transform: 'translateZ(0rem)'
-                        });
-                    }
-                }
-            };
-
-            !callback || callback(this)
-
             return this;
         },
 
@@ -371,6 +305,20 @@
 
     })
 
+
+    // 图片切换效果
+    Division.extend({
+        effect:function(el){
+            var html = document.createElement('div');
+            html.className = "one";
+            var html2 = document.createElement('div')
+            html2.className = "two";
+            el.appendChild(html);
+            el.appendChild(html2)
+        }
+    })
+
+    
 
     Division.on = Division.prototype.on = function(callback) {
         callback && callback(this)

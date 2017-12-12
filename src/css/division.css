@@ -1,0 +1,78 @@
+/* 自定义滚动条样式 */
+/* 浮动 */
+.clearfix {
+  zoom: 1;
+}
+.clearfix:after {
+  content: "";
+  display: block;
+  overflow: hidden;
+  clear: both;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.container {
+  width: 11.24450952rem;
+  height: 6.3250366rem;
+  margin: auto;
+  margin-top: 2.81112738rem;
+  font-size: 0;
+  -webkit-perspective: 7.02781845rem;
+          perspective: 7.02781845rem;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+.container .inner {
+  background-image: url("../img/1490073118356.jpg");
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 2.81112738rem;
+  height: 6.3250366rem;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.container .inner div {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.container .inner div.one {
+  background-image: url("../img/1490073118356.jpg");
+  background-repeat: no-repeat;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.container .inner div.two {
+  background-image: url("../img/1490338321679.jpg");
+  background-repeat: no-repeat;
+  -webkit-transform: rotateY(90deg) translate(50%, -50%);
+          transform: rotateY(90deg) translate(50%, -50%);
+}
+/* 参考图片 */
+.img {
+  width: 4.21669107rem;
+  margin: auto;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.img img {
+  width: 100%;
+}
+/* 控制按钮 */
+.btnCtrl {
+  margin: auto;
+  text-align: center;
+}

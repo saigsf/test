@@ -1,0 +1,113 @@
+// 设置属性
+.z(@name, @value) {
+    @{name}: @value * (1920 / 1366) / 100rem;
+}
+
+.s(@w, @h) {
+    .z(width, @w);
+    .z(height, @h)
+}
+
+// 定位
+.p(@type, @top: 0, @left: 0) {
+    position: @type;
+    top: @top;
+    left: @left;
+}
+
+.pa(@t: 0, @l: 0) {
+    .p(absolute, @t, @l);
+}
+
+.pr(@t: 0, @l: 0) {
+    .p(relative, @t, @l);
+}
+
+
+/* 自定义滚动条样式 */
+
+// ::-webkit-scrollbar {
+//     display: none;
+//     width: 0;
+//     height: 0;
+// }
+
+/* 浮动 */
+
+.clearfix {
+    zoom: 1;
+    &:after {
+        content: "";
+        display: block;
+        overflow: hidden;
+        clear: both;
+    }
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+@w: 800;
+@h: 450;
+.container {
+    .s(@w, @h);
+    margin: auto;
+    .z(margin-top, 200);
+    font-size: 0;
+    .z(perspective, 500);
+        transform-style: preserve-3d; // border: 1px solid #000;
+    .inner {
+        
+        background-image: url("../img/1490073118356.jpg");
+        background-repeat: no-repeat;
+        display: inline-block;
+        .pr();
+        .s(@w/4,
+        @h/1);
+        transition: all 0.5s; // transform: translateZ(1rem)
+        div {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            &.one {
+                background-image: url("../img/1490073118356.jpg");
+                background-repeat: no-repeat;
+                transform: translate(-50%, -50%);
+            }
+            &.two {
+                background-image: url("../img/1490338321679.jpg");
+                background-repeat: no-repeat;
+                transform: rotateY(90deg) translate(50%, -50%);
+            }
+        }
+    }
+}
+
+
+/* 参考图片 */
+
+.img {
+    .z(width,
+    300);
+    margin: auto;
+    height: auto;
+    .pa();
+    img {
+        width: 100%
+    }
+}
+
+
+/* 控制按钮 */
+
+.btnCtrl {
+    margin: auto;
+    text-align: center
+}
