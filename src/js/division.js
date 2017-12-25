@@ -57,7 +57,7 @@
             offsetsY = 0;
             oDivs = [];
             this._render();
-            isEvents === 0 || Division.events();
+            this.events();
             // isEventsSub === 0 || this.subDivision();
         },
         _render: function() {
@@ -73,10 +73,10 @@
                 // offsetsX = Math.floor(Math.random() * 200 - 100);
 
                 this.css.call(oDivs[i], {
-                    // width: subWidth + "px",
-                    // height: subHeight + "px",
-                    // top: offsetsX + "px",
-                    // left: offsetsY + "px",
+                    width: subWidth + "px",
+                    height: subHeight + "px",
+                    top: offsetsX + "px",
+                    left: offsetsY + "px",
                     backgroundSize: totalWidth + "px " + totalHeight + "px"
                 });
                 if (cols === 1 && rows !== 1) {
@@ -119,6 +119,19 @@
 
         hasBorder: function(el) {
             return parseInt(Division.fetchComputedStyle(el, 'borderWidth'))
+        },
+        /* 分裂的触发事件 */
+        events: function (callback) {
+            console.log(el)
+            el.onmouseenter = () => {
+                this.randomSplit();
+            }
+            el.onmouseleave = () => {
+                Division.reset();
+
+            };
+            !callback || callback(this);
+            return this;
         },
         randomSplit: function(callback) {
             for (var i = 0; i < totalNum; i++) {
@@ -288,19 +301,7 @@
                 oDivs[i].style.left = 0 + "px";
             }
         },
-        /* 分裂的触发事件 */
-        events: function(callback) {
-
-            el.onmouseenter = () => {
-                randomSplit();
-            }
-            el.onmouseleave = () => {
-                Division.reset();
-
-            };
-            !callback || callback(this);
-            return this;
-        },
+       
 
 
     })

@@ -1,0 +1,375 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    color: #000;
+    /*overflow: hidden;*/
+}
+
+.page-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /*height: 100%;*/
+}
+
+.page {
+    /*text-align: center;*/
+    /*font-weight: bold;*/
+    line-height: 30px;
+    width: 100%;
+    /*height: 800px;*/
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin-bottom: 40px;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0) url(../img/bg2.jpg) repeat fixed center center / cover;
+}
+
+
+/*.page1 {
+	background: rgba(0, 0, 0, 0) url(../img/bg2.jpg) repeat fixed center center / cover;
+}
+
+.page2 {
+	background: rgba(0, 0, 0, 0) url(../img/bg1base-full.jpg) repeat fixed center center / cover;
+}
+
+.page3 {
+	background: rgba(0, 0, 0, 0) url(../img/bg-news.jpg) repeat fixed center center / cover;
+}
+
+.page4 {
+	background: rgba(0, 0, 0, 0) url(../img/bg2.jpg) repeat fixed center center / cover;
+}
+
+.page5 {
+	background: rgba(0, 0, 0, 0) url(../img/bg-news.jpg) repeat fixed center center / cover;
+}
+
+.page6 {
+	background: rgba(0, 0, 0, 0) url(../img/bg1base-full.jpg) repeat fixed center center / cover;
+}*/
+
+h2,
+h3 {
+    text-align: center;
+    line-height: 60px;
+}
+
+.crew {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    /*/transition: all 0.5s ease 0s;*/
+    margin-bottom: 20px;
+    color: #000;
+}
+
+.crew:hover {
+    box-shadow: 1px 1px 1px 1px #ccc;
+}
+
+.crew .crew-connect {
+    font-size: 16px;
+}
+
+.item {
+    padding: 10px;
+    text-align: center;
+    line-height: 20px;
+    background-color: rgba(100, 0, 0, 0.8);
+}
+
+.item a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.stage {
+    perspective: 500px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.unit {
+    transform-style: preserve-3d;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: all 1s ease 0s;
+}
+
+.unit .item {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.unit .item-title {
+    transform: translateZ(20px);
+    -webkit-transform: translateZ(20px);
+}
+
+.unit .item-content {
+    -webkit-transform: rotateX(-90deg) translateZ(20px);
+    transform: rotateX(-90deg) translateZ(20px);
+    background-color: rgba(100, 100, 0, 0.8);
+}
+
+.stage:hover .unit {
+    transform: rotateX(90deg);
+    -webkit-transform: rotateX(90deg);
+}
+
+.technology {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.technology-content {
+    font-size: 16px;
+    min-height: 80px;
+}
+
+.business-item {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000;
+    padding: 10px;
+    min-height: 110px;
+    margin-bottom: 20px;
+}
+
+@media (min-width:768px) and (max-width: 991px) {
+    .big {
+        height: 240px;
+    }
+}
+
+.summary {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+}
+
+
+/*=======================响应式十栅格系统=============================*/
+
+.mecol-lg-1,
+.mecol-lg-2,
+.mecol-lg-3,
+.mecol-lg-4,
+.mecol-lg-5,
+.mecol-lg-6,
+.mecol-lg-7,
+.mecol-lg-8,
+.mecol-lg-9,
+.mecol-lg-10 {
+    float: left;
+    padding: 0 10px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.mecol-lg-1 {
+    width: 10%;
+}
+
+.mecol-lg-2 {
+    width: 20%;
+}
+
+.mecol-lg-3 {
+    width: 30%;
+}
+
+.mecol-lg-4 {
+    width: 40%;
+}
+
+.mecol-lg-5 {
+    width: 50%;
+}
+
+.mecol-lg-6 {
+    width: 60%;
+}
+
+.mecol-lg-7 {
+    width: 70%;
+}
+
+.mecol-lg-8 {
+    width: 80%;
+}
+
+.mecol-lg-9 {
+    width: 90%;
+}
+
+.mecol-lg-10 {
+    width: 100%;
+}
+
+@media (min-width:992px) and (max-width: 1200px) {}
+
+@media (min-width:992px) and (max-width: 1200px) {
+    .mecol-md-1,
+    .mecol-md-2,
+    .mecol-md-3,
+    .mecol-md-4,
+    .mecol-md-5,
+    .mecol-md-6,
+    .mecol-md-7,
+    .mecol-md-8,
+    .mecol-md-9,
+    .mecol-md-10 {
+        float: left;
+        padding: 0 10px;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+    .mecol-md-1 {
+        width: 10%;
+    }
+    .mecol-md-2 {
+        width: 20%;
+    }
+    .mecol-md-3 {
+        width: 30%;
+    }
+    .mecol-md-4 {
+        width: 40%;
+    }
+    .mecol-md-5 {
+        width: 50%;
+    }
+    .mecol-md-6 {
+        width: 60%;
+    }
+    .mecol-md-7 {
+        width: 70%;
+    }
+    .mecol-md-8 {
+        width: 80%;
+    }
+    .mecol-md-9 {
+        width: 90%;
+    }
+    .mecol-md-10 {
+        width: 100%;
+    }
+}
+
+@media (min-width:768px) and (max-width: 991px) {
+    .mecol-sm-1,
+    .mecol-sm-2,
+    .mecol-sm-3,
+    .mecol-sm-4,
+    .mecol-sm-5,
+    .mecol-sm-6,
+    .mecol-sm-7,
+    .mecol-sm-8,
+    .mecol-sm-9,
+    .mecol-sm-10 {
+        float: left;
+        padding: 0 10px;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+    .mecol-sm-1 {
+        width: 10%;
+    }
+    .mecol-sm-2 {
+        width: 20%;
+    }
+    .mecol-sm-3 {
+        width: 30%;
+    }
+    .mecol-sm-4 {
+        width: 40%;
+    }
+    .mecol-sm-5 {
+        width: 50%;
+    }
+    .mecol-sm-6 {
+        width: 60%;
+    }
+    .mecol-sm-7 {
+        width: 70%;
+    }
+    .mecol-sm-8 {
+        width: 80%;
+    }
+    .mecol-sm-9 {
+        width: 90%;
+    }
+    .mecol-sm-10 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 767px) {
+    .mecol-xs-1,
+    .mecol-xs-2,
+    .mecol-xs-3,
+    .mecol-xs-4,
+    .mecol-xs-5,
+    .mecol-xs-6,
+    .mecol-xs-7,
+    .mecol-xs-8,
+    .mecol-xs-9,
+    .mecol-xs-10 {
+        float: left;
+        padding: 0 10px;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+    .mecol-xs-1 {
+        width: 10%;
+    }
+    .mecol-xs-2 {
+        width: 20%;
+    }
+    .mecol-xs-3 {
+        width: 30%;
+    }
+    .mecol-xs-4 {
+        width: 40%;
+    }
+    .mecol-xs-5 {
+        width: 50%;
+    }
+    .mecol-xs-6 {
+        width: 60%;
+    }
+    .mecol-xs-7 {
+        width: 70%;
+    }
+    .mecol-xs-8 {
+        width: 80%;
+    }
+    .mecol-xs-9 {
+        width: 90%;
+    }
+    .mecol-xs-10 {
+        width: 100%;
+    }
+}
+
+
+/*===============================响应式=============================*/

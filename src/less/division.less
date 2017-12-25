@@ -54,21 +54,28 @@
 
 @w: 800;
 @h: 450;
+
+html,
+body {
+    .z(font-size, 14)
+}
+
 .container {
     .s(@w, @h);
     margin: auto;
     .z(margin-top, 200);
     font-size: 0;
     .z(perspective, 500);
-        transform-style: preserve-3d; // border: 1px solid #000;
+    transform-style: preserve-3d; // border: 1px solid #000;
+    position: relative;
     .inner {
         
         background-image: url("../img/1490073118356.jpg");
         background-repeat: no-repeat;
-        display: inline-block;
+        // display: inline-block;
         .pr();
-        .s(@w/4,
-        @h/1);
+        // .s(@w/4, @h/1);
+        float: left;
         transition: all 0.5s; // transform: translateZ(1rem)
         div {
             width: 100%;
@@ -77,12 +84,12 @@
             top: 50%;
             left: 50%;
             &.one {
-                background-image: url("../img/1490073118356.jpg");
+                // background-image: url("../img/1490073118356.jpg");
                 background-repeat: no-repeat;
                 transform: translate(-50%, -50%);
             }
             &.two {
-                background-image: url("../img/1490338321679.jpg");
+                // background-image: url("../img/1490338321679.jpg");
                 background-repeat: no-repeat;
                 transform: rotateY(90deg) translate(50%, -50%);
             }
@@ -94,8 +101,7 @@
 /* 参考图片 */
 
 .img {
-    .z(width,
-    300);
+    .z(width, 300);
     margin: auto;
     height: auto;
     .pa();

@@ -32,7 +32,7 @@
         }
         add(html.substr(cursor, html.length - cursor));
         code += 'return r.join("");';
-        console.log(new Function(code.replace(/[\r\t\n]/g, '')).apply(data))
+        // console.log(new Function(code.replace(/[\r\t\n]/g, '')).apply(data))
         return new Function(code.replace(/[\r\t\n]/g, '')).apply(data);
     }
     // 通过class查找dom
@@ -61,7 +61,7 @@
             var def = {
                 ok: true,
                 ok_txt: '确定',
-                cancel: false,
+                cancel: function() {},
                 cancel_txt: '取消',
                 input: false,
                 input_text: '请输入···',
@@ -76,7 +76,7 @@
             this.hasDom = false; //检查dom树中dialog的节点是否存在
             this.listeners = []; //自定义事件，用于监听插件的用户交互
             this.handlers = {};
-            console.log(this.dom)
+            // console.log(this.dom)
         },
         _parseTpl: function(tmpId) { // 将模板转为字符串
             var data = this.def;
@@ -110,14 +110,21 @@
                     _this.emit({ type: 'confirm', target: _this.dom })
                 }!!_this.def.confirm && _this.def.confirm.call(this, _this.dom);
             };
-            if (this.def.cancel) {
-                this.dom.getElementsByClass('btn-cancel')[0].onclick = function() {
-                    _this.hide();
-                    if (_this.listeners.indexOf('cancel') > -1) {
-                        _this.emit({ type: 'cancel', target: _this.dom })
-                    }
-                };
-            }
+            // if (this.def.cancel) {
+            //     this.dom.getElementsByClass('btn-cancel')[0].onclick = function() {
+            //         _this.hide();
+            //         if (_this.listeners.indexOf('cancel') > -1) {
+            //             _this.emit({ type: 'cancel', target: _this.dom })
+            //         }
+            //     };
+            // }
+            this.dom.getElementsByClass('btn-cancel')[0].onclick = function() {
+                _this.hide();
+                if (_this.listeners.indexOf('cancel') > -1) {
+                    _this.emit({ type: 'cancel', target: _this.dom })
+                } !!_this.def.cancel && _this.def.cancel.call(this, _this.dom);
+            };
+            
             callback && callback();
             if (this.listeners.indexOf('shown') > -1) {
                 this.emit({ type: 'shown', target: this.dom })

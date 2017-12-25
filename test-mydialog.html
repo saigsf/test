@@ -11,48 +11,64 @@
 </head>
 
 <body>
-
+    <button type="button">测试</button>
     <script type="text/template" id="dialogTpl">
-        <div class="mydialog">
-            <span class="close">×</span>
-            <div class="mydialog-cont">
-                <% if(!this.input){ %>
-                    <div class="cont">
-                        <% this.content %>
-                    </div>
-                    <% } else{ %>
+        <div class="black-overlay">
+          <div class="mydialog">
+                <span class="close">×</span>
+                <div class="mydialog-header">提示信息</div>
+                <div class="mydialog-cont">
+                    <% if(this.input){ %>
                         <div class="cont">
                             <input type="text" value="<% this.input_text %>">
                         </div>
-                        <% } %>
+                    <% } else{ %>
+                        <div class="cont">
+                            <% this.content %>
+                        </div>
+                    <% } %>
 
 
-            </div>
-            <div class="footer">
-                <% if(this.cancel){ %>
-                    <span class="btn btn-ok"><% this.ok_txt %></span>
-                    <span class="btn btn-cancel"><% this.cancel_txt %></span>
+                </div>
+                <div class="mydialog-footer">
+                    <% if(this.cancel){ %>
+                        <span class="btn btn-ok"><% this.ok_txt %></span>
+                        <span class="btn btn-cancel"><% this.cancel_txt %></span>
                     <% } else{ %>
                         <span class="btn btn-ok" style="width: 100%"><% this.ok_txt %></span>
-                        <% } %>
-            </div>
+                    <% } %>
+                </div>
+            </div>  
         </div>
+        
     </script>
-
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
     <script src="./src/js/mydialog.js"></script>
     <script>
         var mydialog = new MyDialog({
             tmpId: 'dialogTpl',
-            cancel: true,
-            content: 'hello world!',
-            input: true
+            content: 'hello world!', // 提示内容
+            confirm: function(){
+                console.log('我是confirm按钮');
+                // 写你的确定之后的逻辑代码...
+            },
+            close: function () {
+                console.log('我是close按钮');
+                // 写你的确定之后的逻辑代码...
+            },
+            cancel: function () {
+                console.log('我是cancel按钮');
+                // 写你的确定之后的逻辑代码...
+            }
         });
-        mydialog.on('confirm', function(ev) {
-            console.log('you click confirm!');
-            // 写你的确定之后的逻辑代码...
-        });
-
-        mydialog.show();
+        // mydialog.on('cancel', function(ev) {
+        //     console.log('you click confirm!');
+        //     // 写你的确定之后的逻辑代码...
+        // });
+        $('button').click(function(){
+            mydialog.show();
+        })
+        
     </script>
 
 </body>
