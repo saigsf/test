@@ -13,12 +13,12 @@
 <body>
     <div class="box">
         <div class="inner">
-            你好
+            <img src="http://saigsf.com/img/03/Gao-1920x1200-004.jpg" alt="">
         </div>
     </div>
     <script src="./src/js/jquery.js"></script>
     <script src="./src/js/unit.js"></script>
-    <script>
+    <script >
         window.onload = function() {
             window.initsize();
             window.onresize = function() {
@@ -31,15 +31,38 @@
         }
         $.ajax({
             type: 'get',
-            url: './src/php/get-file.php',
+            url: 'http://saigsf.com/src/php/get-file.php',
             data: {
-                test: 'Hello World'
-            }
+                file_path: '../json/img.json'
+            },
+            dataType: 'jsonp',
+            jsonp: 'callback'
         }).then(function (res) {
             console.log(res)
+            var html = "";
+            for (let i = 0; i < res.length; i++) {
+                const element = res[i];
+                html += '<div class="inner"><img src="'+element.url+'"alt=""></div>'
+            }
+            $(".box").append($(html));
+            
         },function (err){
             console.log(err)
-        })
+        });
+        // $.ajax({
+        //         type: 'post',
+        //         url: './src/php/set-file.php',
+        //         data: {
+        //             file_path: '../json/test.json',
+        //             file_content: JSON.stringify(res).replace('\"', '"')
+        //         },
+        //         dataType: 'jsonp',
+        //         jsonp: 'callback'
+        //     }).then(function (res) {
+        //         console.log(res)
+        //     }, function (err) {
+        //         console.log(err)
+        //     });
     </script>
 </body>
 

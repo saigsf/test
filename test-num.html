@@ -57,21 +57,31 @@
     <br> 只有小数点：
     <div class="numberRun3"></div>
     <br>
-    <br> 无分隔符，无小数点：
+    <br> 时间格式：
     <div class="numberRun4"></div>
 
 </body>
 <script src="./src/js/jquery-3.1.1.min.js"></script>
-<script src="./src/js/numberAnimate.js"></script>
+<script src="./src/js/jquery.number-animate.js"></script>
 <script>
     $(function() {     //初始化
-        var nums = 15343242.10; 
+        var nums = 15343242; 
         var numRun = $(".numberRun").numberAnimate({
             num: nums + '',
-            dot: 2,
             speed: 2000,
             symbol: ","
         });   
+        var numRun1 = $(".numberRun4").numberAnimate({
+            num: 3600,
+            speed: 2000,
+            symbol: ":",
+            isTime: true
+        });   
+        // console.log(new Date())
+        setInterval(function () {
+            numRun.resetData(3)
+            numRun1.resetData(13234)
+        },4000)
 
     });
 </script>

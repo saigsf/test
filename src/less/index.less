@@ -2,8 +2,8 @@
 html,
 body {
     width: 100%;
-    height: 100%;
-    overflow: hidden;
+    // height: 100%;
+    // overflow: hidden;
     margin: auto
 }
 
@@ -13,15 +13,22 @@ html {
 
 .box {
     width: 100%;
-    height: 100%;
+    // height: 100%;
+    height: auto;
     background: linear-gradient(to bottom, #fff, #333);
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column
 }
 
 .inner {
+    width: 100%;
+    // height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    img {
+        width: 100%;
+    }
 }
